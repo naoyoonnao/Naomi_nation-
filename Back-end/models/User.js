@@ -5,4 +5,4 @@ const UserSchema = new mongoose.Schema({
   password: { type: String, required: true }, // Пароль буде хешуватись перед збереженням
 });
 
-module.exports = mongoose.model("User", UserSchema);
+module.exports = mongoose.model("User", UserSchema); 

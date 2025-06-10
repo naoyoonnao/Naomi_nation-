@@ -1,0 +1,158 @@
+/* src/components/CatGalleryModal/CatGalleryModal.module.scss  —  обновлено */
+
+$overlay:   rgba(#000, .6);    // тінь поверх blur
+$blur:      8px;               // сила блюру
+$panel-bg:  rgba(#1a1a1a, .85); // напівпрозора картка
+$edge-grad: linear-gradient(90deg, rgba(#000, .45) 0%, rgba(#000, 0) 60%);
+$yellow:    #f5c343;
+$yellow-h:  #ffd767;
+$gray:      #666;
+
+
+/******************* Backdrop *******************/
+.backdrop {
+  position: fixed;
+  inset: 0;
+  background: $overlay;
+  backdrop-filter: blur($blur);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+/******************* Modal panel *******************/
+.modal {
+  position: relative;
+  width: 80vw;
+  max-width: 900px;
+  background: $panel-bg;
+  padding: 40px 56px 64px;
+  border-radius: 4px;
+  overflow: hidden;
+
+  /* легке затемнення країв */
+  
+  
+  
+
+  img {
+    width: 100%;
+    max-width: 100%;
+    max-height: 60vh; /* не виходить за екран */
+    aspect-ratio: 1/1; /* квадратно */
+    object-fit: contain;
+  }
+}
+
+/******************* Controls *******************/
+.close {
+  position: absolute;
+  top: 12px;
+  right: 18px;
+  font-size: 26px;          
+  line-height: 1;
+  background: none;
+  border: none;
+  color: $yellow;
+  cursor: pointer;
+  transition: color .2s;
+  &:hover { color: $yellow-h; }
+}
+
+.arrow {
+    /* контейнер-кнопка */
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 44px;      /* зона кліку, не впливає на візуальну товщину */
+    height: 44px;
+    background: none;
+    border: none;
+    cursor: pointer;
+  
+    /* прибираємо старий символ */
+    font-size: 0;
+    color: transparent;
+  
+    /* нова “галочка” */
+    &::before {
+      content: "";
+      display: block;
+      width: 18px;          /* видима довжина плеча */
+      height: 18px;
+      border-left: 3px solid #f5c343;   /* жовтий (#F5C343) */
+      border-bottom: 3px solid #f5c343;
+      transform: rotate(45deg);
+      margin: auto;         /* центрує всередині кнопки */
+    }
+  
+    /* hover — легке збільшення */
+    &:hover::before { transform: rotate(45deg) scale(1.15); }
+  
+    /* ліву й праву розвертаємо */
+    &.prev { left: 8px; }               /* позиція зліва */
+    &.next {
+        right: 8px;
+    
+        /* ­розвертаємо тільки «галочку», а не контейнер */
+        &::before { transform: rotate(-135deg); }
+      }
+  }
+
+/******************* Indicators *******************/
+.dots {
+  position: absolute;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50%;
+  height: 4px;
+  display: flex;
+}
+
+.dot,
+.dotActive {
+  height: 100%;
+  background: $gray;
+  transition: background .3s;
+}
+.dotActive { background: $yellow; }
+
+/******************* Responsive *******************/
+@media (max-width: 768px) {
+  .modal { width: 92vw; padding: 32px 32px 56px; }
+  .arrow { font-size: 24px; }
+  .close { font-size: 22px; }
+  .dots  { width: 70%; }
+}
+
+.sliderWrap {        
+    position: relative;
+    padding: 0 44px;    
+  }
+
+  .sliderWrap img {
+    width: 100%;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    border-radius: 4px;
+  }
+
+
+  .progress {
+  position: absolute;
+  left: 30px;            
+  right: 30px;
+  bottom: 24px;
+  height: 4px;
+  background: #555;
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.fill {
+  height: 100%;
+  background: #f5c343;
+  transition: width .3s;
+}

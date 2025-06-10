@@ -1,0 +1,206 @@
+/* --- уже існуючі backdrop / modal / close залишаються --- */
+
+.heading { margin: 0 0 12px; }
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 6px 0;
+  color: #000;                /* текст чорним */
+}
+
+.label { min-width: 130px; font-weight: 600; }
+
+.value {
+  flex: 1 1 auto;
+  word-break: break-word;
+}
+
+.row input,
+.row textarea {
+  flex: 1 1 auto;
+  padding: 4px 6px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.pencil {
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: 16px;
+  margin-left: 4px;
+}
+
+.save {
+  margin-top: 14px;
+  width: 100%;
+  background: #0d6efd;
+  color: #fff;
+  border: none;
+  padding: 8px 20px;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* --- backdrop: повноекранне затемнення --- */
+.backdrop {
+    position: fixed;
+    inset: 0;                         /* top/left/right/bottom = 0  */
+    background: rgba(0, 0, 0, 0.6);   /* напівпрозорий чорний */
+    display: flex;
+    align-items: center;              /* вертикально по центру */
+    justify-content: center;          /* горизонтально по центру */
+    z-index: 1000;                    /* поверх усього контенту */
+  }
+  
+  /* --- сама модалка --- */
+  .modal {
+    background: #fff;                 /* біла картка */
+    color: #000;                      /* чорний текст усередині */
+    width: 90%;
+    max-width: 620px;                 /* щоб не розтягувалась */
+    max-height: 80vh;                 /* не вищі за 80% екрана */
+    overflow-y: auto;                 /* прокрутка, якщо рядків багато */
+    border-radius: 10px;
+    padding: 28px 32px;
+    position: relative;               /* для хрестика */
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25);
+  }
+  
+  /* --- хрестик закриття --- */
+  .close {
+    position: absolute;
+    top: 10px;
+    right: 12px;
+    border: none;
+    background: none;
+    font-size: 26px;
+    cursor: pointer;
+  }
+  
+  /* решта стилів (row, label, value, pencil, save) залишаються такими, як у попередньому варіанті */
+  
+  /* -------------------  DARK THEME  ------------------- */
+
+/* біла підкладка → темна */
+.modal {
+    background: #181818;          /* майже чорний */
+    color: #fff;                  /* текст за замовчув. білий */
+  }
+  
+  /* заголовок */
+  .heading {
+    color:#e5b454;               /* жовтий */
+    margin: 0 0 14px;
+  }
+  
+  /* назви полів (Name:, Color: …) */
+  .label {
+    color: #e5b454;               /* жовтий */
+    min-width: 130px;
+    font-weight: 600;
+  }
+  
+  /* значення (звичайний текст) лишається білим через color: #fff у .modal */
+  
+  /* input / textarea в темній темі */
+  .row input,
+  .row textarea {
+    background: #222;
+    color: #fff;
+    border: 1px solid #555;
+  }
+  
+  /* ✏️  олівчики – без змін, але можна трохи підсвітити при наведенні */
+  .pencil:hover { opacity: 0.8; }
+  
+  /* кнопка Save */
+  .save {
+    background:#e5b454;          /* жовтий */
+    color: #000;                  /* чорний текст */
+    border: none;
+    padding: 9px 20px;
+    border-radius: 6px;
+    font-weight: 700;
+    cursor: pointer;
+    width: 100%;
+  }
+  
+  .save:hover { filter: brightness(1.05); }
+  
+  .row select {
+    flex: 1 1 auto;
+    padding: 4px 6px;
+    border: 1px solid #555;
+    border-radius: 4px;
+    background: #222;
+    color: #fff;
+  }
+
+  .thumb {            /* маленьке превʼю картки */
+    width: 120px;
+    height: 90px;
+    object-fit: cover;
+    border-radius: 4px;
+  }
+  
+  .select {           /* drop-down category + availability */
+    flex: 1 1 auto;
+    padding: 4px 6px;
+    border: 1px solid #555;
+    border-radius: 4px;
+    background: #222;
+    color: #fff;
+  }
+
+  .gallery {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    max-width: 100%;
+  }
+  
+  .gThumb {
+    position: relative;
+    width: 60px;
+    height: 60px;
+    flex: 0 0 60px;
+  }
+  
+  .gThumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 4px;
+  }
+  
+  .del {
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    background: rgba(0,0,0,.7);
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+  }
+  
+  .add {
+    width: 60px;
+    height: 60px;
+    border: 2px dashed #555;
+    background: transparent;
+    color: #888;
+    font-size: 24px;
+    line-height: 54px;
+    text-align: center;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  

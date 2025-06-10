@@ -1,0 +1,34 @@
+@use '../../assets/colors' as *;
+
+.wrapper {
+  background: $bgc;
+}
+
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+}
+
+.card {
+  position: relative;
+  width: 320px;          
+  height: 320px;
+  cursor: pointer;
+  
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .overlay-name {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    font-size: 24px;
+    color: $text-light;
+    font-weight: 500;
+    pointer-events: none;
+  }
+}

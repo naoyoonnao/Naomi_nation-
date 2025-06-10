@@ -1,0 +1,156 @@
+
+   $bgc:        #0d0d0d;   // фон
+   $dark-grey:  #222;      // темні блоки інпутів
+   $mustard:    #e8b85e;   // кнопка POST
+   $text-light: #ffffff;   // білий текст
+   
+
+   body { background: $bgc; color: $text-light; font-family: "Inter", sans-serif; }
+   
+   .admin {
+     padding: 40px 60px;
+     max-width: 1000px;
+     margin: 0 auto;
+   
+     h1 { font-size: 48px; margin-bottom: 32px; }
+   }
+   
+   /* ----------------------------------------------------------------------
+      Універсальне поле (label + input/select)
+      -------------------------------------------------------------------- */
+   .field {
+     display: block;
+     font-weight: 600;
+     margin-bottom: 18px;
+   
+     input,
+     select {
+       width: 100%;
+       margin-top: 6px;
+       padding: 10px 12px;
+       background: $dark-grey;
+       border: 1px solid rgba(255,255,255,.25);
+       border-radius: 6px;
+       color: $text-light;
+       font-family: inherit;
+   
+       &:focus { outline: none; border-color: $mustard; }
+     }
+   }
+   
+   /* ----------------------------------------------------------------------
+      1) Рядок з головним фото
+      -------------------------------------------------------------------- */
+   .photo-row {
+     display: flex;
+     gap: 24px;
+     margin: 32px 0;
+   
+     @media (max-width: 768px) { flex-direction: column; }
+   }
+   
+   /* ― прямокутник-дропзона ― */
+   .rect-drop {
+     flex: 1;
+     min-height: 260px;
+     background: $dark-grey;
+     border: 2px dashed rgba(255,255,255,.15);
+     display: flex; align-items: center; justify-content: center;
+     cursor: pointer;
+   
+     img { width: 100%; height: 100%; object-fit: cover; }
+   }
+   .hint { color: rgba(255,255,255,.6); text-align: center; line-height: 1.4; }
+   
+   /* ― квадрат-превʼю ― */
+   .square-preview {
+     width: 220px; aspect-ratio: 1 / 1;
+     background: $dark-grey;
+     display: flex; align-items: center; justify-content: center;
+   
+     img { width: 100%; height: 100%; object-fit: cover; }
+   }
+   .square-hint { color: rgba(255,255,255,.45); font-size: 20px; }
+   
+   /* ----------------------------------------------------------------------
+      2) Колонка текстових полів
+      -------------------------------------------------------------------- */
+   .fields-column {
+     display: flex;
+     flex-direction: column;
+     margin: 32px 0;
+   
+     .field + .field { margin-top: 14px; }
+   }
+   
+   /* ----------------------------------------------------------------------
+      3) Дропзона галереї
+      -------------------------------------------------------------------- */
+   .dropzone.gallery {
+     margin: 32px 0;
+     min-height: 220px;
+     background: $dark-grey;
+     border: 2px dashed rgba(255,255,255,.15);
+     display: flex; align-items: center; justify-content: center;
+     cursor: pointer;
+   
+     .hint { color: rgba(255,255,255,.6); text-align: center; line-height: 1.4; }
+   }
+   
+   /* ----------------------------------------------------------------------
+      4) Превʼю галереї
+      -------------------------------------------------------------------- */
+   .thumb-row {
+     display: flex;
+     gap: 20px;
+     flex-wrap: wrap;
+   
+     .thumb {
+       position: relative;
+       width: 140px; aspect-ratio: 1 / 1;
+       background: $dark-grey;
+   
+       img { width: 100%; height: 100%; object-fit: cover; }
+   
+       .close {
+         position: absolute; top: 4px; right: 4px;
+         background: rgba(0,0,0,.6); color: #fff;
+         border: none; border-radius: 50%; width: 22px; height: 22px;
+         cursor: pointer; line-height: 22px;
+       }
+     }
+   }
+   
+   /* ----------------------------------------------------------------------
+      5) Кнопка POST
+      -------------------------------------------------------------------- */
+   .form-actions {
+     display: flex; justify-content: center; margin: 40px 0;
+   
+     .post-btn {
+       background: $mustard;
+       color: #000;
+       padding: 14px 48px;
+       font-weight: 700;
+       border: none;
+       border-radius: 10px;
+       cursor: pointer;
+       transition: opacity .2s;
+   
+       &:hover { opacity: .9; }
+     }
+   }
+   
+
+input[type='date'] {
+ 
+  accent-color: $mustard;
+
+  
+  &::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+    /* інвертуємо нативну іконку у жовтий відтінок */
+    filter: invert(71%) sepia(57%) saturate(492%) hue-rotate(-20deg)
+            brightness(98%) contrast(96%);
+  }
+}

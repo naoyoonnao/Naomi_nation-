@@ -1,0 +1,90 @@
+.wrap   { padding: 40px 0; }
+
+.title  {
+  font: 700 48px/1.1 "Inter", sans-serif;
+  color: #fff;
+  margin-bottom: 32px;
+}
+
+.grid   { display: flex; gap: 32px; flex-wrap: wrap; }
+
+.tile   {
+  padding: 1.8rem 4.5rem;
+  font: 600 26px/1 "Inter", sans-serif;
+  color: #fff;
+  background: #202020;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+.tile:hover { background: #333; }
+
+.addBtn { @extend .tile; border: 2px dashed #fff; background: none; }
+
+.image {
+  width: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.caption {
+  display: block;
+  width: 100%;
+  text-align: center;
+  padding: 12px 0;
+  background: #111;
+  color: #fff;
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.editBtn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 32px;
+  height: 32px;
+  background: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.card {
+  position: relative;
+  background: #111;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+.card {
+  position: relative;
+  &:hover .editBtn { opacity: 1; }
+}
+
+.editBtn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.9);
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity .2s ease;
+}

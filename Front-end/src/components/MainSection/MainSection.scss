@@ -1,0 +1,144 @@
+@use '../../assets/colors' as *;
+
+.content-wrapper {
+  height: auto;
+  background-color: #0a0a0a;
+  display: flex;
+  align-items: center;
+  overflow-x: hidden;
+  overflow-y: visible;
+  position: relative;
+  padding: 2.5em  7em 0;
+
+}
+
+.oriental {
+  position: fixed;
+  left: -3rem;
+  right: 0;
+  color: #1a1a1a;
+  z-index: 0;
+  text-align: center;
+  pointer-events: none;
+  user-select: none;
+  height: 20em;
+}
+
+.Cat {
+    position: relative;
+    margin-left: auto;
+    height: 43em;
+    padding-left: 0px;
+    transform: translateX(-50px);
+    z-index: 1;
+  }
+
+.logo {
+  height: 100px;
+}
+
+.content {
+  width: 60vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  z-index: 1;
+}
+
+h1 {
+  font-size: 4em;
+  color: white;
+  width: 700px;
+}
+
+.description {
+  font-size: 1rem;
+  margin-top: 1rem;
+  color: #ccc;
+}
+
+.cta {
+  margin-top: 2rem;
+  padding: 0.8rem 1.6rem;
+  font-size: 1rem;
+  background-color: #e1ad56;
+  color: black;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+
+@media (max-width: 80px) {
+  .content-wrapper {
+    flex-direction: column;
+    padding: 2rem 1rem;
+    text-align: center;
+    height: auto;
+  }
+
+  .content {
+    width: 100%;
+    height: auto;
+    justify-content: center;
+  }
+
+  .inside {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  h1 {
+    font-size: 2.2em;
+    width: auto;
+  }
+
+  .description {
+    width: 100%;
+  }
+
+  
+}
+
+.content-wrapper {
+  display: flex;                 
+  align-items: center;
+  justify-content: space-between;          
+          
+}
+
+.content {
+  max-width: 540px;              
+}
+
+
+.description {                   
+  font-size: 18px;
+  line-height: 1.4;
+  color: #c9c9c9;
+}
+
+@media (max-width: 900px) {
+  .content-wrapper {
+    flex-direction: column;     
+    text-align: center;
+  }
+  .oriental {
+    position: fixed;
+    left: -5rem;
+    right: 0;
+    color: #1a1a1a;
+    z-index: 0;
+    text-align: center;
+    pointer-events: none;
+    user-select: none;
+    height: 15em;
+    margin-top: 15rem;
+  }
+}
+
+button{
+  color: black;
+}
+

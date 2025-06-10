@@ -1,16 +1,14 @@
-const jwt = require("jsonwebtoken");
+const jwt = require('jsonwebtoken');
+const JWT_SECRET = process.env.JWT_SECRET || 'DEV_SECRET';
 
-const authMiddleware = (req, res, next) => {
-  const token = req.header("Authorization");
-  if (!token) return res.status(401).json({ message: "Немає доступу, токен відсутній" });
+module.exports = (req, res, next) => {
+  const token = req.header('Authorization');
+  if (!token) return res.status(401).json({ message: 'Немає доступу, токен відсутній' });
 
   try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    req.user = decoded;
+    req.user = jwt.verify(token, JWT_SECRET);
     next();
-  } catch (err) {
-    res.status(401).json({ message: "Невірний або прострочений токен" });
+  } catch {
+    res.status(401).json({ message: 'Невірний або протермінований токен' });
   }
 };
-
-module.exports = authMiddleware;

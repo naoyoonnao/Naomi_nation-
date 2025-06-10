@@ -1,0 +1,143 @@
+
+// ===== Palette =====
+$bg-dark:   #0d0d0d;
+$border:    #262626;
+$yellow:    #f5c343;
+$yellow-h:  #ffd767;
+$green:     #b4ff6c;
+$red:       #ff5e5e;
+$text-main: #f0f0f0;
+$text-dim:  #c9c9c9;
+
+// ===== Layout wrapper =====
+.list {
+  max-width: 960px;
+  margin: 0 auto 96px;
+  padding: 0 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 64px;
+
+  &::before {
+    content: "SIAMESE";
+    position: absolute;
+    left: -80px;
+    top: 0;
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 200px;
+    color: rgba(#ffffff, 0.04);
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    pointer-events: none;
+    user-select: none;
+  }
+}
+
+// ===== Card =====
+.card {
+  position: relative;
+  display: flex;
+  gap: 32px;
+  background: $bg-dark;
+  border: 1px solid $border;
+  border-radius: 4px;
+  padding: 32px;
+  box-shadow: 0 0 6px rgba(#000, .7);
+}
+
+/*********  Photo  *********/
+.photoWrap {
+    position: relative;
+    flex: 0 0 20em;
+    
+  
+    img {
+        width: 100%;
+        aspect-ratio: 1/1;
+        object-fit: cover;
+      }
+      
+  /* ім’я на фото */
+  &::after {
+    content: attr(data-name);
+    position: absolute;
+    left: 12px;
+    top: 12px;
+    font-size: 22px;
+    font-weight: 600;
+    color: #ffffff;
+    text-shadow: 0 0 4px rgba(#000, .8);
+  }
+}
+
+/*********  Info area  *********/
+.info {
+  flex: 1 1 auto;
+  color: $text-main;
+  font-size: 15px;
+  line-height: 1.35;
+
+  p {
+    margin: 0 0 6px;
+  }
+
+  strong {
+    color: $yellow;
+    font-weight: 600;
+  }
+
+  a {
+    color: lighten($yellow, 10%);
+    text-decoration: underline;
+    &:hover { color: $yellow-h; }
+  }
+}
+
+/*********  CTA  *********/
+.more {
+  display: inline-block;
+  margin-top: 18px;
+  padding: 6px 28px;
+  background: $yellow;
+  border: none;
+  border-radius: 2px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background .2s;
+  &:hover { background: $yellow-h; }
+}
+
+/*********  Availability badge  *********/
+.badge {
+  position: absolute;
+  bottom: 18px;
+  right: 32px;
+  font-size: 14px;
+  font-weight: 700;
+  &.available { color: $green; }
+  &.reserved  { color: $yellow; }
+  &.sold      { color: $red; }
+}
+
+// ===== Responsive =====
+@media (max-width: 900px) {
+  .list::before { left: -60px; font-size: 160px; }
+  .card { gap: 24px; padding: 24px; }
+  .photoWrap { flex-basis: 300px; }
+}
+
+@media (max-width: 600px) {
+  .list { gap: 48px; }
+  .list::before { display: none; }
+  .card {
+    flex-direction: column;
+    align-items: center;
+  }
+  .photoWrap { flex: 0 0 auto; width: 80%; }
+  .photoWrap::after { left: 16px; top: 16px; font-size: 20px; }
+  .badge { position: static; margin-top: 8px; }
+  .info { font-size: 14px; }
+}
+
+
+  

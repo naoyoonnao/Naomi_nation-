@@ -1,23 +1,35 @@
-const express = require("express");
-const bcrypt = require("bcryptjs");
-const User = require("../models/User");
+const express = require('express');
+const bcrypt  = require('bcryptjs');
+const jwt     = require('jsonwebtoken');
+const User    = require('../models/User');
+
+const JWT_SECRET = process.env.JWT_SECRET || 'DEV_SECRET';
+const ADMIN_CREDENTIALS = { login: 'admin', password: 'admin123' };
 
 const router = express.Router();
 
-// ✅ Реєстрація користувача
-router.post("/register", async (req, res) => {
+router.post('/login', async (req, res) => {
   const { login, password } = req.body;
 
+  /* статичний адмін */
+  if (login === ADMIN_CREDENTIALS.login && password === ADMIN_CREDENTIALS.password) {
+    const token = jwt.sign({ login }, JWT_SECRET, { expiresIn: '1h' });
+    return res.json({ token });
+  }
+
+  /* (необов’язково) реальний користувач із бази */
   try {
-    const existingUser = await User.findOne({ login });
-    if (existingUser) return res.status(400).json({ message: "Користувач вже існує" });
+    const user = await User.findOne({ login });
+    if (!user) return res.status(401).json({ message: 'Невірний логін або пароль' });
 
-    const hashedPassword = await bcrypt.hash(password, 10);
-    const newUser = await User.create({ login, password: hashedPassword });
+    const ok = await bcrypt.compare(password, user.password);
+    if (!ok)  return res.status(401).json({ message: 'Невірний логін або пароль' });
 
-    res.status(201).json({ message: "Користувач створений", user: { id: newUser._id, login: newUser.login } });
+    const token = jwt.sign({ login: user.login }, JWT_SECRET, { expiresIn: '1h' });
+    res.json({ token });
   } catch (err) {
-    res.status(500).json({ message: "Помилка сервера" });
+    console.error(err);
+    res.status(500).json({ message: 'Помилка сервера' });
   }
 });
 

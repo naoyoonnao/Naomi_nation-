@@ -1,0 +1,106 @@
+@use '../../assets/colors' as *;
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.lang-switcher {
+    display: inline-flex;
+    position: relative;
+    background: $dark-bg;               
+    border: 2px solid $mustard;        
+    border-radius: 30px;             
+    overflow: hidden;               
+    width: 120px;
+
+    .option {
+      flex: 1 1 auto;
+      text-align: center;
+      padding: 0.3em 0.8em;
+      cursor: pointer;
+      user-select: none;
+      font-weight: 300;
+      color: $mustard;               
+      position: relative;
+      z-index: 1;                   
+  
+      &.active {
+        color: $text-dark;               
+      }
+    }
+  
+    .indicator {
+      position: absolute;
+      top: 2px;
+      bottom: 2px;
+      left: 2px;
+      width: calc(50% - 4px);
+      background: $mustard;          
+      border-radius: 30px;         
+      transition: left 0.3s ease; 
+    }
+  
+    .option.ua.active ~ .indicator {
+      left: calc(50% + 2px);   
+    }
+    .option.en.active ~ .indicator {
+      left: 2px;             
+    }
+}
+
+// Make h1 headers slightly thinner by default
+h1 {
+  font-weight: 500; // or 400 for even thinner
+}
+
+html.lang-ua {
+  h1 {
+    font-size: 4rem;
+    line-height: 1.2;
+    font-weight: 500;
+  }
+
+  .cta {
+    font-size: 0.95rem;
+  }
+}
+
+html.lang-en {
+  h1 {
+    font-size: 5rem;
+    line-height: 1.1;
+    font-weight: 500;
+  }
+
+  .cta {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 800px) {
+  html.lang-ua {
+    h1 {
+      font-size: 3rem;
+      line-height: 1.2;
+      font-weight: 500;
+    }
+  
+    .cta {
+      font-size: 0.95rem;
+    }
+  }
+  
+  html.lang-en {
+    h1 {
+      font-size: 4rem;
+      line-height: 1.1;
+      font-weight: 500;
+    }
+  
+    .cta {
+      font-size: 1rem;
+    }
+  }
+}
