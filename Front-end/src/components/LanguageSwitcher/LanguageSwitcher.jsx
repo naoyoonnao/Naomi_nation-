@@ -5,16 +5,17 @@ import './LanguageSwitcher.scss';
 
 const LanguageSwitcher = () => {
   const { i18n } = useTranslation();
-  const [language, setLanguage] = useState(i18n.language || 'en');
 
+  // читаємо з localStorage одразу, щоб мати правильний первинний стан
+  const getInitialLang = () => localStorage.getItem('language') || i18n.language || 'en';
+  const [language, setLanguage] = useState(getInitialLang);
+
+  // На маунт переконуємось, що i18n синхронізовано
   useEffect(() => {
-    // Завантажуємо збережену мову з localStorage при завантаженні сторінки
-    const savedLang = localStorage.getItem('language');
-    if (savedLang && savedLang !== language) {
-      i18n.changeLanguage(savedLang);
-      setLanguage(savedLang);
+    if (i18n.language !== language) {
+      i18n.changeLanguage(language);
     }
-  }, [i18n, language]);
+  }, []); // одноразово
 
   // Функція для перекладу тексту через DeepL API
   const translateText = async (text, langCode) => {

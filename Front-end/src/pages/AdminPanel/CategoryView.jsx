@@ -8,6 +8,11 @@ const API = import.meta.env.VITE_API_URL || 'http://localhost:8080';
 export default function CategoryView({ title = 'Категорія', posts: init = [] }) {
   const navigate = useNavigate();
   const [posts,   setPosts] = useState(init);
+
+  useEffect(() => {
+    setPosts(init);
+  }, [init]);
+
   const [editing, setEdit]  = useState(null);
   const [toast,   setToast] = useState('');
 

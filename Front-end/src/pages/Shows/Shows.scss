@@ -32,9 +32,9 @@ $text-light: #ffffff;
   }
 
   .events-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 4rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 2rem;
   }
 }
 

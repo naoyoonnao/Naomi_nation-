@@ -1,10 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import './AnimatedSearchBar.scss';
 import searchIcon from '../../assets/SearchIcon.svg';
+import { SearchContext } from '../../context/SearchContext';
 
-export default function AnimatedSearchBar() {
+export default function AnimatedSearchBar({ onSearchToggle = () => {} }) {
+  const { setQuery } = useContext(SearchContext);
   const [isOpen, setIsOpen] = useState(false);
+  const [value, setValue] = useState("");
+
+  // Inform parent (Header) when open state changes
+  useEffect(() => {
+    onSearchToggle(isOpen);
+  }, [isOpen, onSearchToggle]);
 
   return (
     <>
@@ -43,7 +51,12 @@ export default function AnimatedSearchBar() {
                   type="text"
                   placeholder="Search..."
                   autoFocus
-                  onBlur={() => setIsOpen(false)}
+                  value={value}
+                  onChange={(e)=>{
+                      setValue(e.target.value);
+                      setQuery(e.target.value.toLowerCase());
+                  }}
+                  onBlur={()=>setIsOpen(false)}
                   autoComplete="off"
                 />
                 <img src={searchIcon} alt="search icon" className="icon" />

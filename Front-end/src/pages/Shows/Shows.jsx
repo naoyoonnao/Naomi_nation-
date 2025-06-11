@@ -1,17 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import Header from "../../components/Header/Header";
 import CatGalleryModal from "../../components/CatGalleryModal/CatGalleryModal";
+import EventCard from "../../components/EventCard/EventCard";
+import { SearchContext } from "../../context/SearchContext";
 import "./Shows.scss";
 
-/**
- * Shows.jsx – сторінка «SHOWS» з горизонтальними картками + готова модалка
- * CatGalleryModal (Swiper усередині) для перегляду фотографій події.
- * ---------------------------------------------------------------------------
- * ▸ Fetch /api/events  →  картки (фото ліворуч, дані праворуч).
- * ▸ «See more photos» відкриває <CatGalleryModal images={...} />.
- * ▸ images = event.gallery (массив імен файлів)  ||  [event.mainImage].
- * ▸ Шлях до кожного файлу: `${API_BASE}/uploads/${filename}`.
- */
 export default function Shows() {
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -22,6 +15,8 @@ export default function Shows() {
   const [galleryImages, setGalleryImages] = useState([]);
 
   const API_BASE = import.meta.env.VITE_API_URL ?? ""; // .env або proxy
+
+  const { query: searchQuery } = useContext(SearchContext);
 
   /* ───────── fetch events ─────────────────────────────────────────────── */
   useEffect(() => {
@@ -37,8 +32,8 @@ export default function Shows() {
         if (!res.ok) throw new Error(`API error: ${res.status}`);
         const data = await res.json();
 
-        // Від нижчих до вищих карток
-        data.sort((a, b) => (a.height ?? 0) - (b.height ?? 0));
+        // newest first
+        data.sort((a, b) => new Date(b.date || 0) - new Date(a.date || 0));
 
         if (!ignore) setEvents(data);
       } catch (err) {
@@ -79,40 +74,18 @@ export default function Shows() {
 
         {!loading && !error && (
           <div className="events-grid">
-            {events.map((e) => (
-              <article className="event-card" key={e._id || e.id}>
-                {/* фото */}
-                <div className="event-card__img-wrapper">
-                  <img
-                    src={`${API_BASE}/uploads/${e.mainImage}`}
-                    alt={e.title}
-                    loading="lazy"
-                  />
-                </div>
-
-                {/* дані */}
-                <div className="event-card__body">
-                  <div className="event-card__row">
-                    <span className="label">Title:</span>
-                    <span>{e.title}</span>
-                  </div>
-                  <div className="event-card__row">
-                    <span className="label">Date:</span>
-                    <span>
-                      {e.date ? new Date(e.date).toLocaleDateString() : "—"}
-                    </span>
-                  </div>
-                  <div className="event-card__row">
-                    <span className="label">Description:</span>
-                    <span>{e.description || "—"}</span>
-                  </div>
-
-                  <button className="btn-more" onClick={() => openGallery(e)}>
-                    See more photos
-                  </button>
-                </div>
-              </article>
-            ))}
+            {events
+              .filter((e) =>
+                searchQuery ? e.title.toLowerCase().includes(searchQuery) : true
+              )
+              .map((e) => (
+                <EventCard
+                  key={e._id}
+                  event={e}
+                  apiBase={API_BASE}
+                  onOpenGallery={openGallery}
+                />
+              ))}
           </div>
         )}
       </section>

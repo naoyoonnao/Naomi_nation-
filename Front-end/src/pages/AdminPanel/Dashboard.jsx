@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import styles from './Dashboard.module.scss';
 import AddEventModal  from "./AddEventModal";
 import EditEventModal from "./EditEventModal";         // ← імпорт уже був, лишаємо
+import { toast } from 'react-toastify';
 
 export default function Dashboard({ categories, onAdd, onSelect, onEventSaved }) {
   const nav = useNavigate();
@@ -43,7 +44,7 @@ export default function Dashboard({ categories, onAdd, onSelect, onEventSaved })
       <div className={styles.grid}>
         {mode === 'categories' && (
           <>
-            {categories.map(name => (
+            {(categories || []).map(name => (
               <button
                 key={name}
                 className={styles.tile}
@@ -88,14 +89,34 @@ export default function Dashboard({ categories, onAdd, onSelect, onEventSaved })
         <div className={styles.grid}>
           {events.map(ev => (
             <div key={ev._id} className={styles.card}>
-              {/* ✏️ overlay у кутку картки */}
-              <button
-                className={styles.editBtn}
-                title="Edit event"
-                onClick={() => setEditing(ev)}
-              >
-                ✏️
-              </button>
+              {/* edit + delete overlay */}
+              <div className={styles.cardActions}>
+                <button
+                  className={styles.editBtn}
+                  title="Edit event"
+                  onClick={() => setEditing(ev)}
+                >
+                  ✏️
+                </button>
+                <button
+                  className={styles.deleteBtn}
+                  title="Delete event"
+                  onClick={async () => {
+                    if (!confirm("Delete event?")) return;
+                    try {
+                      const api = import.meta.env.VITE_API_URL || "";
+                      await fetch(`${api}/api/events/${ev._id}`, { method: "DELETE" });
+                      handleDelete(ev._id);
+                      toast.success("Event deleted");
+                    } catch (e) {
+                      console.error(e);
+                      toast.error("Delete failed");
+                    }
+                  }}
+                >
+                  🗑️
+                </button>
+              </div>
 
               <img
                 src={ev.mainImageUrl ||

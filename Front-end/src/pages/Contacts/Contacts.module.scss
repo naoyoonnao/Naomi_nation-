@@ -1,0 +1,281 @@
+@use '../../assets/colors' as *;
+@use 'sass:color';
+
+.contactsPage {
+  background-color: #0a0a0a;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden; // Ensures oriental text doesn't cause overflow
+}
+
+.container {
+  display: flex;
+  justify-content: flex-start; // Align items to the start to make space for the image on the right
+  align-items: flex-start; // Align items to the top
+  padding: 6rem 10em;
+  flex-grow: 1; // Allows container to take available space
+  position: relative; // For positioning the image inside
+  z-index: 1;
+}
+
+.leftContent { // New wrapper for info and form
+  display: flex;
+  flex-direction: column;
+  gap: 2rem; // Space between info and form
+  z-index: 2;
+  width: 750px; 
+  flex-shrink: 0; // Prevent this block from shrinking
+}
+
+.info {
+  width: 100%;
+  color: white;
+
+  p {
+    margin-bottom: 0.75rem;
+    font-size: 1.125rem;
+  }
+}
+
+.logo {
+  height: 80px;
+  margin-bottom: 2rem;
+}
+
+.socials {
+  display: flex;
+  flex-direction: column; // Stack social icons vertically
+  gap: 1rem; // Space between social links
+  margin-top: 2rem;
+
+  a {
+    display: flex;
+    align-items: center;
+    color: white;
+    text-decoration: none;
+    font-size: 1.125rem;
+    
+    svg {
+      margin-right: 0.5rem;
+      width: 24px;
+      height: 24px;
+      color: white;
+    }
+
+    &:hover {
+      color: #e1ad56; // Hover effect for social links
+      svg {
+        color: #e1ad56;
+      }
+    }
+  }
+}
+
+.form {
+  width: 40em; 
+  z-index: 2;
+
+  .formGroup {
+    margin-bottom: 2rem;
+  }
+
+  input,
+  textarea {
+    padding: 0.8rem 1rem;
+    background-color: #2a2a2a;
+    border: 1px solid #444;
+    border-radius: 6px;
+    color: white;
+    font-size: 1rem;
+    box-sizing: border-box; // Include padding in width
+    outline: none;
+
+    &::placeholder {
+      color: #888;
+    }
+
+    &:focus {
+      border-color: #e1ad56;
+    }
+  }
+
+  textarea {
+    resize: vertical;
+    min-height: 120px;
+  }
+
+  .submitBtn {
+    padding: 0.8rem 5rem;
+    font-size: 1rem;
+    background-color: #e1ad56;
+    color: black;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+
+    &:disabled {
+      background-color: #cccccc;
+      cursor: not-allowed;
+    }
+
+    &:hover:not(:disabled) {
+      background-color: color.adjust(#e1ad56, $lightness: -10%);
+    }
+  }
+
+  .statusMsgSuccess {
+    color: #4CAF50;
+    margin-top: 1rem;
+  }
+
+  .statusMsgError {
+    color: #f44336;
+    margin-top: 1rem;
+  }
+}
+
+.imageWrapper {
+  position: absolute;
+  right: 0; // Align to the very right of the container
+  bottom: 0; // Align to the bottom of the container
+  height: 100%; // Take full height of the container
+  display: flex;
+  align-items: flex-end; // Align cat image to the bottom
+  z-index: 1; // Below the info/form but above oriental text
+  // Забираємо негативний margin-right, який занадто сильно зміщував кота
+  margin-right: 0; 
+}
+
+.catImage {
+  height: 90%; // Повертаємо до початкової висоти, яка краще відповідала скріншоту
+  object-fit: contain; // Ensures the image scales correctly
+  pointer-events: none; // Prevent image from interfering with interactions
+  user-select: none; // Prevent text selection on image
+  max-height: 800px; // Optional: limit max height for very large screens
+  // Зміщуємо кота лівіше, щоб його лапа була над формою, як на скріншоті
+  transform: translateX(-50px); 
+}
+
+
+.oriental {
+  position: fixed;
+  transform: translateX(-10em);
+  z-index: 0;
+  color: #1a1a1a;
+  white-space: nowrap;
+  height: 20em;
+  top: 20em;
+}
+
+
+/* --- АДАПТИВНІСТЬ (ДЛЯ ПЛАНШЕТІВ ТА МОБІЛЬНИХ) --- */
+
+@media (max-width: 900px) {
+  .container {
+    padding: 3rem 4em;
+  }
+
+  .imageWrapper {
+    right: 0; 
+    margin-right: 0; // Змінюємо, щоб не було зайвого зсуву
+  }
+
+  .catImage {
+    height: 85%; 
+    transform: translateX(-30px); // Коригуємо зсув для менших екранів
+  }
+}
+
+@media (max-width: 992px) {
+  .container {
+    flex-direction: column;
+    align-items: center;
+    padding: 10rem 2rem;
+  }
+
+  .leftContent {
+    max-width: 100%;
+    align-items: center;
+  }
+
+  .info {
+    text-align: center;
+
+    p {
+      text-align: center;
+    }
+  }
+
+  .logo {
+    margin: 0 auto 2rem auto; 
+  }
+
+  .socials {
+    flex-direction: row; 
+    justify-content: center;
+    gap: 2rem;
+  }
+
+  .form {
+    margin-top: 2rem;
+    max-width: 500px;
+  }
+
+  .imageWrapper {
+    position: relative; // Change to relative positioning for flow
+    right: auto;
+    bottom: auto;
+    top: auto; 
+    height: auto; 
+    width: 100%;
+    display: flex;
+    justify-content: center; 
+    margin-top: 3rem;
+    margin-right: 0; 
+  }
+
+  .catImage {
+    height: auto;
+    width: 80%;
+    max-width: 400px; 
+    transform: translateX(0); 
+  }
+
+  .oriental {
+    height: 15em;
+  }
+}
+
+@media (max-width: 576px) {
+  .container {
+    padding: 10rem 1.5rem;
+  }
+
+  .info p {
+    font-size: 1rem;
+  }
+
+  .socials {
+    flex-wrap: wrap; 
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  .catImage {
+    width: 100%;
+  }
+
+  .form {
+    input, textarea {
+      padding: 0.6rem 0.8rem;
+    }
+  }
+  .submitBtn {
+    width: 100%;
+    margin-right: 4em;
+  }
+}

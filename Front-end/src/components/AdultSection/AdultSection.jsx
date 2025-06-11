@@ -2,7 +2,7 @@ import React from "react";
 import { useTranslation }  from "react-i18next";
 import Oriental            from "../../assets/Oriental.svg";
 import Logo                from "../../assets/logo.svg";
-import Kitten            from "../../assets/Kitten.png";
+import Adult            from "../../assets/Adult.png";
 import "../MainSection/MainSection.scss";
 
 export default function Main() {
@@ -23,7 +23,7 @@ export default function Main() {
         </div>
       </div>
       <img className="oriental"  src={Oriental} alt="" />
-      <img className="Cat"       src={Kitten} alt="" />
+      <img className="Cat"       src={Adult} alt="" />
     </div>
   );
 }

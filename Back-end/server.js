@@ -7,6 +7,8 @@ const authRoutes = require('./routes/authRoutes');
 const catRoutes  = require('./routes/cats');
 const categoryRoutes = require('./routes/categories');
 const eventRoutes = require("./routes/events");
+const contactRoutes = require("./routes/contact");
+const i18nRoutes    = require("./routes/i18n");
 
 const app = express();
 app.use(cors({ origin: '*' }));
@@ -18,6 +20,8 @@ app.use('/user',     authRoutes);  // POST /user/login
 app.use('/api/cats', catRoutes);   // POST /api/cats, GET /api/cats
 app.use('/api/categories', categoryRoutes); 
 app.use("/api/events", eventRoutes);
+app.use("/api/contact", contactRoutes);
+app.use("/api/i18n", i18nRoutes);
 /* Тестовий ендпойнт */
 app.get('/', (_, res) => res.send('Сервер працює!'));
 
@@ -26,4 +30,3 @@ connectDB().then(() => {
   const PORT = process.env.PORT || 8080;
   app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
 });
-

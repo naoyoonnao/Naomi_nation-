@@ -1,0 +1,75 @@
+@use '../../assets/colors' as *;
+
+.footer {
+  background: #111;
+  padding: 2rem 0;
+  border-top: 1px solid #262626;
+  color: #c9c9c9;
+  font-family: "Inter", sans-serif;
+  font-size: 0.9rem;
+}
+
+.inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.colLeft {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.brand {
+  font-size: 1.4rem;
+  color: #f5c343;
+  margin: 0;
+  line-height: 1;
+  span {
+    color: #fff;
+  }
+}
+
+.copy {
+  margin: 0;
+}
+
+.colMid {
+  display: flex;
+  gap: 1.2rem;
+  a {
+    color: #c9c9c9;
+    text-decoration: none;
+    transition: color .25s;
+    &:hover {
+      color: #f5c343;
+    }
+  }
+}
+
+.colRight {
+  display: flex;
+  gap: 1rem;
+}
+
+.iconFb, .iconIg {
+  width: 28px; height: 28px;
+  display: inline-block;
+  background-size: cover;
+  filter: brightness(0) invert(1) opacity(.8);
+  transition: filter .25s;
+  &:hover { filter: brightness(0) invert(1) opacity(1); }
+}
+.iconFb { background-image: url('../../assets/icons/facebook.svg'); }
+.iconIg { background-image: url('../../assets/icons/instagram.svg'); }
+
+@media (max-width: 600px) {
+  .inner { justify-content: center; text-align: center; }
+  .colMid { flex-wrap: wrap; justify-content: center; }
+}

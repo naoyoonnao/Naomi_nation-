@@ -1,18 +1,17 @@
 @use '../../assets/colors' as *;
 
+// mini icon in header
 .mini-search {
   background: $mustard;
   border-radius: 9999px;
-  width: 12rem;
+  width: 9rem;
   height: 35px;
   padding: 0 10px;
   display: flex;
   justify-content: flex-end;
   align-items: center;
-
-  
   cursor: pointer;
-  z-index: 10;
+  z-index: 15; // above header items
 
   .icon {
     width: 20px;
@@ -25,7 +24,7 @@
   position: fixed;
   inset: 0;
   background: $overlay-bg;
-  z-index: 9;
+  z-index: 19; // below search box
 }
 
 .expanded-search-wrapper {
@@ -33,7 +32,8 @@
   inset: 0;
   display: flex;
   justify-content: center;
-  z-index: 9;
+  align-items: center;         // fully center
+  z-index: 20;                 // above overlay and header
 }
 
 .expanded-search {

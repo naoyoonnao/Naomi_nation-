@@ -55,7 +55,33 @@ exports.createCat = async (req, res) => {
 /* ───────── READ (/api/cats[?category=]) ───────── */
 exports.getCats = async (req, res) => {
   try {
-    const filter = req.query.category ? { category: req.query.category } : {};
+    const { category, search } = req.query;
+    const filter = {};
+
+    // Фільтрація по категорії (мапа синонімів + нечутливо до регістру)
+    if (category) {
+      const map = {
+        kittens: 'кошенята',
+        kitten: 'кошенята',
+        'кошеня': 'кошенята',
+        'кошенята': 'кошенята',
+      };
+      const norm = (category || '').toLowerCase();
+      const mapped = map[norm] ?? category;
+
+      // частковий або повний збіг без врахування регістру
+      filter.category = { $regex: mapped, $options: 'i' };
+    }
+
+    // Пошук по імені або категорії (case-insensitive)
+    if (search) {
+      const regex = { $regex: search, $options: 'i' };
+      filter.$or = [
+        { name: regex },
+        { category: regex },
+      ];
+    }
+
     const cats = await Cat.find(filter).sort({ createdAt: -1 });
     res.json(cats);
   } catch (err) {

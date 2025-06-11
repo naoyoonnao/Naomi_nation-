@@ -1,0 +1,198 @@
+.aboutPage {
+  background: #0d0d0d;
+  color: #ffffff;
+  min-height: 100vh;
+}
+
+/* ------ HERO ------ */
+.hero {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  background-size: cover;
+  background-position: center;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+}
+
+.heroContent {
+  position: relative;
+  padding: 0 2rem;
+  max-width: 480px;
+}
+
+.logo {
+  width: 140px;
+  margin-bottom: 0.5rem;
+}
+
+h1 {
+  font-size: 3rem;
+  margin: 0.5rem 0 1.5rem;
+}
+
+.lead {
+  font-size: 1rem;
+  margin-bottom: 2rem;
+  line-height: 1.5;
+}
+
+.cta {
+  background: #e3b23d;
+  color: #0d0d0d;
+  border: none;
+  padding: 0.7rem 1.6rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.cta:hover { background: #e5b84d; }
+
+/* ------ MAIN SECTIONS ------ */
+.main {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 4rem 1.5rem 6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+}
+
+.section {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2.5rem;
+  align-items: center;
+}
+
+.reverse .text { order: 2; }
+.reverse img  { order: 1; }
+
+.section img {
+  width: 100%;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.text h2 { font-size: 1.75rem; margin-bottom: 1rem; }
+.text p  { font-size: 0.95rem; line-height: 1.6; text-align: justify; }
+
+@media (max-width: 768px) {
+  h1 { font-size: 2.4rem; }
+  .heroContent { max-width: 90%; padding: 0 1rem; }
+}
+
+/* ------ BASIC LAYOUT ------ */
+.aboutPage {
+ 
+  color: #ffffff;
+  min-height: 100vh;
+}
+
+/* ------ HERO ------ */
+.hero {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  background-size: cover;
+  background-position: center;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+}
+
+.heroContent {
+  position: relative;
+  padding: 0 2rem;
+  max-width: 480px;
+}
+
+.logo {
+  width: 140px;
+  margin-bottom: 0.5rem;
+}
+
+h1 {
+  font-size: 3rem;
+  margin: 0.5rem 0 1.5rem;
+}
+
+.lead {
+  font-size: 1rem;
+  margin-bottom: 2rem;
+  line-height: 1.5;
+}
+
+.cta {
+  background: #e3b23d;       /* gold */
+  color: #0d0d0d;
+  border: none;
+  padding: 0.7rem 1.6rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.cta:hover {
+  background: #e5b84d;       /* трохи світліший gold */
+}
+
+/* ------ MAIN SECTIONS ------ */
+.main {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 4rem 1.5rem 6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+}
+
+.section {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2.5rem;
+  align-items: center;
+}
+
+.reverse .text {
+  order: 2;
+}
+.reverse img {
+  order: 1;
+}
+
+.section img {
+  width: 100%;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.text h2 {
+  font-size: 1.75rem;
+  margin-bottom: 1rem;
+}
+
+.text p {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  text-align: justify;
+}
+
+/* ------ MOBILE ------ */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2.4rem;
+  }
+  .heroContent {
+    max-width: 90%;
+    padding: 0 1rem;
+  }
+}

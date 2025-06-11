@@ -39,13 +39,12 @@ export default function Header() {
 
         <nav className={`menu ${isMenuOpen ? 'active' : ''}`}>
           <ul>
-            <li><a href="/breeding">In breeding</a></li>
-            <li><a href="#">For sale</a></li>
-            <li><a href="#">About us</a></li>
-            <li><a href="/shows">Shows</a></li>
-            <li><a href="/kittens">Kittens</a></li>
             <li><a href="/">Home</a></li>
-            <li><a href="#">Contacts</a></li>
+            <li><a href="/about">About us</a></li>
+            <li><a href="/kittens">Kittens</a></li>
+            <li><a href="/breeding">In breeding</a></li>
+            <li><a href="/shows">Shows</a></li>
+            <li><a href="/contacts">Contacts</a></li>
           </ul>
         </nav>
 
